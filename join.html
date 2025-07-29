@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join AcePlayNation</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+ 
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#sports-grid">Sports</a></li>
+        <li><a href="#upcoming-events">Events</a></li>
+        <li><a href="#athlete-spotlight">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="join-section">
+    <div class="join-container">
+      <h1 class="join-title">Join AcePlayNation</h1>
+      <form class="join-form" id="joinForm" autocomplete="off">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="Full Name" required maxlength="60" placeholder="Enter your full name">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="Phone Number" required maxlength="20" pattern="[0-9+\-\s()]{7,20}" placeholder="e.g. 9800000000">
+
+        <label for="university">University Name</label>
+        <input type="text" id="university" name="University Name" required maxlength="80" placeholder="Enter your university">
+
+        <label for="game">Game</label>
+        <select id="game" name="Game" required>
+          <option value="" disabled selected>Select a game</option>
+          <option>Football</option>
+          <option>Basketball</option>
+          <option>Volleyball</option>
+          <option>Cricket</option>
+          <option>Futsal</option>
+          <option>Swimming</option>
+          <option>Marathon</option>
+          <option>PUBG</option>
+          <option>FreeFire</option>
+          <option>Valorant</option>
+          <option>E-Football</option>
+        </select>
+
+        <label for="apu">APU Number</label>
+        <input type="text" id="apu" name="APU Number" required maxlength="30" placeholder="Enter your APU number">
+
+        <button type="submit">Submit</button>
+      </form>
+      <div class="success-message" id="successMsg">
+        Thank you for joining! Your form has been submitted and downloaded.
+      </div>
+    </div>
+  </section>
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .join-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      padding: 40px 10px;
+    }
+    .join-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 36px 28px 28px 28px;
+      max-width: 420px;
+      width: 100%;
+    }
+    .join-title {
+      text-align: center;
+      color: #054ac3;
+      font-size: 2rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .join-form label {
+      display: block;
+      margin-bottom: 6px;
+      color: #222;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .join-form input,
+    .join-form select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      border: 1px solid #cfd8dc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f5f7fa;
+      transition: border 0.2s;
+    }
+    .join-form input:focus,
+    .join-form select:focus {
+      border-color: #054ac3;
+      outline: none;
+      background: #fff;
+    }
+    .join-form button {
+      width: 100%;
+      background: #054ac3;
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .join-form button:hover {
+      background: #032e7a;
+    }
+    .success-message {
+      display: none;
+      text-align: center;
+      color: #2e7d32;
+      background: #eafaf1;
+      border: 1px solid #b2dfdb;
+      border-radius: 6px;
+      padding: 14px 10px;
+      margin-top: 18px;
+      font-size: 1.08rem;
+      font-weight: 500;
+    }
+    @media (max-width: 600px) {
+      .join-container {
+        padding: 22px 6vw 18px 6vw;
+      }
+      .join-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+  <script>
+    document.getElementById('joinForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Collect form data
+      const form = e.target;
+      const data = {
+        "Full Name": form.fullName.value.trim(),
+        "Phone Number": form.phone.value.trim(),
+        "University Name": form.university.value.trim(),
+        "Game": form.game.value,
+        "APU Number": form.apu.value.trim()
+      };
+
+      // Format as text
+      let txt = '';
+      for (const [key, value] of Object.entries(data)) {
+        txt += key + ': ' + value + '\n';
+      }
+
+      // Show success message before previous location
+      const successMsg = document.querySelector('.success-message');
+      if (successMsg) {
+        successMsg.style.display = 'block';
+        successMsg.textContent = "You have joined successfully!";
+      }
+
+      // Optionally reset the form
+      form.reset();
+
+      // Redirect to homepage after 2 seconds
+      setTimeout(function() {
+        window.location.href = "index.html";
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact AcePlayNation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <div class="logo">AcePlayNation</div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#sports-grid">Sports</a></li>
+            <li><a href="#upcoming-events">Events</a></li>
+            <li><a href="#athlete-spotlight">Athletes</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+          </ul>
+        </nav>
+      </header>
+  <div class="contact-container">
+    <section class="contact-form-section">
+      <h1>Contact Us</h1>
+      <p>We’d love to hear from you – reach out with any questions or feedback!</p>
+      <form class="contact-form" id="contactForm" autocomplete="off">
+        <div>
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="Full Name" required maxlength="60" placeholder="Enter your full name">
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="Email" required maxlength="80" placeholder="Enter your email address">
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="number" id="phone" name="Phone" required maxlength="20" placeholder="e.g. 9800000000" oninput="if(this.value.length>20)this.value=this.value.slice(0,20);">
+        </div>
+        <div>
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="Subject" required maxlength="80" placeholder="Subject of your message">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="Message" required maxlength="1000" rows="4" placeholder="Type your message here..."></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+    <aside class="contact-info-section">
+      <div class="contact-info-title">Contact Information</div>
+      <ul class="contact-info-list">
+        <li>
+          <span class="icon address">📍</span>
+          <span>AcePlayNation, Kathmandu, Nepal</span>
+        </li>
+        <li>
+          <span class="icon phone">📞</span>
+          <span>+977-9800000000</span>
+        </li>
+        <li>
+          <span class="icon email">📧</span>
+          <span>info@aceplaynation.com</span>
+        </li>
+      </ul>
+      <div class="contact-info-title" style="margin-bottom:10px;">Connect with us</div>
+      <div class="contact-socials">
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <!-- Instagram SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <!-- Facebook SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><path d="M15.5 8.5h-2a1 1 0 0 0-1 1v2h3l-.5 2h-2.5v6h-2v-6h-2v-2h2v-1.5A2.5 2.5 0 0 1 13.5 7h2v1.5z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="Twitter" aria-label="Twitter">
+          <!-- Twitter SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><path d="M17.5 9.5a4.1 4.1 0 0 1-1.18.32 2.07 2.07 0 0 0 .9-1.14 4.13 4.13 0 0 1-1.3.5A2.06 2.06 0 0 0 12 11.06c0 .16.02.32.05.47A5.85 5.85 0 0 1 7.5 9.7a2.06 2.06 0 0 0 .64 2.75 2.04 2.04 0 0 1-.93-.26v.03a2.07 2.07 0 0 0 1.65 2.02c-.2.06-.41.09-.62.03a2.07 2.07 0 0 0 1.93 1.44A4.14 4.14 0 0 1 6.5 16.1c-.27 0-.54-.02-.8-.07A5.85 5.85 0 0 0 9.29 17c6.29 0 9.74-5.21 9.74-9.74 0-.15 0-.3-.01-.45A6.9 6.9 0 0 0 19 8.5a4.13 4.13 0 0 1-1.5.41z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </aside>
+  </div>
+  <style>
+    body {
+      background: #f7f9fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      color: #222;
+    }
+    .contact-container {
+      max-width: 950px;
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(5,74,195,0.08);
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+    }
+    .contact-form-section {
+      flex: 1.2;
+      padding: 44px 38px 38px 38px;
+      background: #f7f9fb;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-form-section h1 {
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #054ac3;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .contact-form-section p {
+      text-align: center;
+      color: #555;
+      font-size: 1.08rem;
+      margin-bottom: 32px;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .contact-form label {
+      font-weight: 600;
+      color: #054ac3;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      letter-spacing: 0.1px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 14px;
+      border: 1.5px solid #dbe6fd;
+      border-radius: 7px;
+      font-size: 1rem;
+      background: #f5f7fa;
+      transition: border 0.2s, background 0.2s;
+      font-family: inherit;
+      resize: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #054ac3;
+      background: #fff;
+      outline: none;
+    }
+    .contact-form textarea {
+      min-height: 80px;
+      max-height: 180px;
+      line-height: 1.5;
+    }
+    .contact-form button {
+      margin-top: 8px;
+      background: #054ac3;
+      color: #fff;
+      border: none;
+      padding: 13px 0;
+      border-radius: 7px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(5,74,195,0.08);
+      letter-spacing: 0.2px;
+    }
+    .contact-form button:hover,
+    .contact-form button:focus {
+      background: #032e7a;
+    }
+
+    .contact-info-section {
+      flex: 1;
+      background: #fff;
+      padding: 44px 34px 38px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1.5px solid #e3eaf7;
+      min-width: 260px;
+    }
+    .contact-info-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #054ac3;
+      margin-bottom: 18px;
+      letter-spacing: 0.2px;
+    }
+    .contact-info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px 0;
+      font-size: 1.05rem;
+      color: #333;
+    }
+    .contact-info-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+    .contact-info-list .icon {
+      font-size: 1.25rem;
+      color: #054ac3;
+      width: 1.6em;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .contact-info-list .icon.email {
+      color: #ff0040;
+    }
+    .contact-info-list .icon.phone {
+      color: #009688;
+    }
+    .contact-info-list .icon.address {
+      color: #f9a825;
+    }
+    .contact-info-list .icon.social {
+      color: #222;
+    }
+    .contact-socials {
+      display: flex;
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .contact-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f5f7fa;
+      color: #054ac3;
+      font-size: 1.35rem;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(5,74,195,0.06);
+      transition: background 0.18s, color 0.18s;
+    }
+    .contact-socials a:hover {
+      background: #054ac3;
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .contact-container {
+        flex-direction: column;
+        max-width: 98vw;
+        margin: 28px 0 0 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .contact-form-section,
+      .contact-info-section {
+        border-radius: 0;
+        padding: 32px 7vw 28px 7vw;
+        border-left: none;
+      }
+      .contact-info-section {
+        border-top: 1.5px solid #e3eaf7;
+        min-width: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .contact-form-section,
+      .contact-info-section {
+        padding: 22px 4vw 18px 4vw;
+      }
+      .contact-form-section h1 {
+        font-size: 1.3rem;
+      }
+      .contact-info-title {
+        font-size: 1.08rem;
+      }
+      .contact-form {
+        max-width: 100%;
+      }
+    }
+  </style>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Message sent successfully!');
+      // Clear all fields
+      this.reset();
+    });
+  </script>
+</body>
+</html>

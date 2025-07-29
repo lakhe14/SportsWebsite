@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Sports Organization</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#sports-grid">Sports</a></li>
+        <li><a href="#upcoming-events">Events</a></li>
+        <li><a href="#athlete-spotlight">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fueling Passion, Powering Performance</h1>
+      <p>Welcome to the heart of university sports. Join us and be part of the action!</p>
+      <div class="hero-buttons">
+        <a href="join.html" class="btn btn-primary">Join Now</a>
+        <a href="about.html" class="btn btn-secondary">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-bg-overlay">
+      <button id="nextVideoBtn" class="video-switch-btn"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <video id="heroVideo" class="hero-bg" autoplay muted loop poster="assets/images/hero.jpg">
+      <source src="assets/videos/hero1.mp4" type="video/mp4">
+    </video>
+  </section>
+  <main>
+    <section class="sports-grid" id="sports-grid">
+      <h2>Our Sports</h2>
+      <div class="grid">
+        <div class="sport-card">
+          <img src="assets/images/football.jpg" alt="Football" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-futbol"></i>
+            <span>Football</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/basketball.jpg" alt="Basketball" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-basketball"></i>
+            <span>Basketball</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/volleyball.jpg" alt="Volleyball" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-volleyball"></i>
+            <span>Volleyball</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/tabletennis.jpg" alt="Table Tennis" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+            <span>Table Tennis</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/track.jpg" alt="Track & Field" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-person-running"></i>
+            <span>Marathon</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/swimming.jpg" alt="Swimming" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-swimmer"></i>
+            <span>Swimming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Upcoming Events Section -->
+<section class="upcoming-events" id="upcoming-events">
+  <h2>Upcoming Events</h2>
+  <div class="events-grid">
+    <!-- Sports Gala -->
+    <div class="event-card physical">
+      <div class="event-icon"><img src="assets/images/gala.jpg" alt="Sports Gala"></div>
+      <div class="event-title">Sports Gala</div>
+      <div class="event-datetime">August 5, 2025 – 5:00 PM</div>
+      <div class="event-location">Main Stadium</div>
+    </div>
+    <!-- Marathon -->
+    <div class="event-card physical">
+      <div class="event-icon"><img src="assets/images/marathon.jpg" alt="Marathon"></div>
+      <div class="event-title">Marathon</div>
+      <div class="event-datetime">August 20, 2025 – 7:00 AM</div>
+      <div class="event-location">City Park</div>
+    </div>
+    <!-- Basketball Tournament -->
+    <div class="event-card physical">
+      <div class="event-icon"><img src="assets/images/basketball1.jpg" alt="Basketball"></div>
+      <div class="event-title">Basketball Tournament</div>
+      <div class="event-datetime">October 5, 2025 – 3:00 PM</div>
+      <div class="event-location">Sports Complex</div>
+    </div>
+    <!-- Futsal -->
+    <div class="event-card physical">
+      <div class="event-icon"><img src="assets/images/football1.jpg" alt="Futsal"></div>
+      <div class="event-title">Futsal</div>
+      <div class="event-datetime">October 20, 2025 – 4:00 PM</div>
+      <div class="event-location">Indoor Arena</div>
+    </div>
+    <!-- PUBG Tournament -->
+    <div class="event-card esports">
+      <div class="event-icon"><img src="assets/images/pubg.jpg" alt="PUBG"></div>
+      <div class="event-title">PUBG Tournament</div>
+      <div class="event-datetime">November 5, 2025 – 6:00 PM</div>
+      <div class="event-location">Online</div>
+    </div>
+    <!-- E-Football Championship -->
+    <div class="event-card esports">
+      <div class="event-icon"><img src="assets/images/e-football.jpg" alt="E-Football"></div>
+      <div class="event-title">E-Football Championship</div>
+      <div class="event-datetime">November 20, 2025 – 5:00 PM</div>
+      <div class="event-location">Online</div>
+    </div>
+  </div>
+</section>
+<!-- Athlete Spotlight Section -->
+<section class="athlete-spotlight" id="athlete-spotlight">
+    <h2 class="section-title">Athlete Spotlight</h2>
+    <div class="athlete-grid">
+  
+      <!-- Footballer -->
+      <div class="athlete-card">
+        <img src="assets/images/anjan-bista.jpg" alt="Anjan Bista" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">Anjan Bista</div>
+          <div class="athlete-role">Forward, Nepal National Football Team</div>
+          <div class="athlete-bio">
+            With over 10 international goals, Anjan is one of Nepal’s top footballers, known for his agility, footwork, and leadership.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Basketball Player -->
+      <div class="athlete-card">
+        <img src="assets/images/sujan-lama.jpg" alt="Sujan Lama" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">Sujan Lama</div>
+          <div class="athlete-role">Captain, Kathmandu Titans</div>
+          <div class="athlete-bio">
+            A dominating presence on the court, Sujan leads with strategy and precision. 2024 National League MVP.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Swimmer -->
+      <div class="athlete-card">
+        <img src="assets/images/Gaurika-Singh.jpg" alt="Gaurika Singh" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">Gaurika Singh</div>
+          <div class="athlete-role">Olympic Swimmer, Nepal</div>
+          <div class="athlete-bio">
+            Nepal’s youngest Olympian, Gaurika holds multiple national records and inspires a generation of athletes.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Marathon Runner -->
+      <div class="athlete-card">
+        <img src="assets/images/santoshi.jpg" alt="Santoshi Shrestha" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">Santosh Budha</div>
+          <div class="athlete-role">National Marathon Champion</div>
+          <div class="athlete-bio">
+            Known for his endurance and speed, Santosh is a 3-time Kathmandu Marathon winner and national hero.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Tennis Player -->
+      <div class="athlete-card">
+        <img src="assets/images/pritee-rana.jpg" alt="Preeti Rana" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">Preeti Rana</div>
+          <div class="athlete-role">Nepal No. 1 Women’s Tennis Player</div>
+          <div class="athlete-bio">
+            With a powerful serve and quick reflexes, Preeti dominates courts across South Asia.
+          </div>
+        </div>
+      </div>
+  
+      <!-- PUBG Player -->
+      <div class="athlete-card">
+        <img src="assets/images/cr7.jpg" alt="SK49 (Sushant Khadka)" class="athlete-photo">
+        <div class="athlete-info">
+          <div class="athlete-name">SK49 (Sushant Khadka)</div>
+          <div class="athlete-role">Pro PUBG Esports Athlete, Nepal</div>
+          <div class="athlete-bio">
+            A rising star in Nepal’s esports scene, SK49 is known for sharp aim, strategic plays, and national tournament wins.
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results">
+    <h2>Latest Match Results</h2>
+    <ul class="results-list">
+      <li>Football: Tribhuvan FC 2 - 1 Kathmandu United</li>
+      <li>Basketball: Nepal Warriors 80 - 74 Pokhara Panthers</li>
+      <li>Volleyball: Everest Spikers 3 - 2 Lumbini Smashers</li>
+      <li>Swimming: Preety Chaudhary won Gold in 100m Freestyle</li>
+      <li>PUBG: Nishan Lakhe (Team X) secured 1st place in Intercollege Esports Cup</li>
+      <li>Marathon: Anshika Mishra placed 2nd in the 10K National University Run</li>
+    </ul>
+    <a href="news.html" class="btn btn-secondary">Read More</a>
+  </section>
+  
+   
+    
+  </main>
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 UnivSports. All rights reserved.</span>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+
