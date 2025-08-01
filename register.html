@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - AcePlayNation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Container Styles */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h1 {
+            color: #0056b3;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Form Styles */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:hover,
+        .form-group select:hover {
+            border-color: #0056b3;
+        }
+
+        /* Password field with icon */
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #0056b3;
+        }
+
+        /* Button Styles */
+        .auth-button {
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 86, 179, 0.3);
+        }
+
+        .auth-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Link Styles */
+        .auth-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .auth-links a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            color: #003d82;
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .auth-button {
+            position: relative;
+        }
+
+        .loading .auth-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Animation */
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .auth-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .auth-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Error Styles */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: #dc3545;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="auth-container">
+        <!-- Header Section -->
+        <div class="auth-header">
+            <h1><i class="fas fa-user-plus"></i> Register</h1>
+            <p>Join AcePlayNation and start your sports journey</p>
+        </div>
+
+        <!-- Registration Form -->
+        <form class="auth-form" id="registerForm">
+            <!-- Full Name Field -->
+            <div class="form-group" id="fullNameGroup">
+                <label for="fullName">
+                    <i class="fas fa-user"></i> Full Name
+                </label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    name="fullName" 
+                    placeholder="Enter your full name"
+                    required
+                >
+                <div class="error-message" id="fullNameError"></div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group" id="emailGroup">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email address"
+                    required
+                >
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <!-- University Field -->
+            <div class="form-group" id="universityGroup">
+                <label for="university">
+                    <i class="fas fa-university"></i> University
+                </label>
+                <input 
+                    type="text" 
+                    id="university" 
+                    name="university" 
+                    placeholder="Enter your university name"
+                    required
+                >
+                <div class="error-message" id="universityError"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group" id="passwordGroup">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <div class="password-field">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Create a strong password"
+                        required
+                    >
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <!-- Section Field -->
+            <div class="form-group" id="sectionGroup">
+                <label for="section">
+                    <i class="fas fa-users"></i> Section
+                </label>
+                <select id="section" name="section" required>
+                    <option value="">Select your section</option>
+                    <option value="A">Section A</option>
+                    <option value="B">Section B</option>
+                    <option value="C">Section C</option>
+                    <option value="D">Section D</option>
+                    <option value="E">Section E</option>
+                </select>
+                <div class="error-message" id="sectionError"></div>
+            </div>
+
+            <!-- APU Number Field -->
+            <div class="form-group" id="apuNumberGroup">
+                <label for="apuNumber">
+                    <i class="fas fa-id-card"></i> APU Number
+                </label>
+                <input 
+                    type="text" 
+                    id="apuNumber" 
+                    name="apuNumber" 
+                    placeholder="Enter your APU number"
+                    required
+                >
+                <div class="error-message" id="apuNumberError"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="auth-button" id="registerButton">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+        </form>
+
+        <!-- Login Link -->
+        <div class="auth-links">
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const registerForm = document.getElementById('registerForm');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+        const registerButton = document.getElementById('registerButton');
+
+        // Password Toggle Functionality
+        passwordToggle.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Update icon
+            const icon = this.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Form Validation Functions
+        function validateFullName(fullName) {
+            if (!fullName.trim()) {
+                return 'Full name is required';
+            }
+            if (fullName.length < 2) {
+                return 'Full name must be at least 2 characters long';
+            }
+            if (!/^[a-zA-Z\s]+$/.test(fullName)) {
+                return 'Full name can only contain letters and spaces';
+            }
+            return '';
+        }
+
+        function validateEmail(email) {
+            if (!email.trim()) {
+                return 'Email is required';
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Please enter a valid email address';
+            }
+            return '';
+        }
+
+        function validateUniversity(university) {
+            if (!university.trim()) {
+                return 'University name is required';
+            }
+            if (university.length < 3) {
+                return 'University name must be at least 3 characters long';
+            }
+            return '';
+        }
+
+        function validatePassword(password) {
+            if (!password) {
+                return 'Password is required';
+            }
+            if (password.length < 6) {
+                return 'Password must be at least 6 characters long';
+            }
+            if (!/(?=.*[a-z])/.test(password)) {
+                return 'Password must contain at least one lowercase letter';
+            }
+            if (!/(?=.*[A-Z])/.test(password)) {
+                return 'Password must contain at least one uppercase letter';
+            }
+            if (!/(?=.*\d)/.test(password)) {
+                return 'Password must contain at least one number';
+            }
+            return '';
+        }
+
+        function validateSection(section) {
+            if (!section) {
+                return 'Please select a section';
+            }
+            return '';
+        }
+
+        function validateApuNumber(apuNumber) {
+            if (!apuNumber.trim()) {
+                return 'APU number is required';
+            }
+            if (!/^\d{8,}$/.test(apuNumber)) {
+                return 'APU number must be at least 8 digits';
+            }
+            return '';
+        }
+
+        // Display Error Function
+        function showError(fieldId, errorMessage) {
+            const group = document.getElementById(fieldId + 'Group');
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            group.classList.add('error');
+            errorElement.textContent = errorMessage;
+            errorElement.style.display = 'block';
+        }
+
+        // Clear Error Function
+        function clearError(fieldId) {
+            const group = document.getElementById(fieldId + 'Group');
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            group.classList.remove('error');
+            errorElement.style.display = 'none';
+        }
+
+        // Real-time Validation
+        const formFields = ['fullName', 'email', 'university', 'password', 'section', 'apuNumber'];
+        
+        formFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            
+            field.addEventListener('blur', function() {
+                const value = this.value;
+                let error = '';
+                
+                switch(fieldId) {
+                    case 'fullName':
+                        error = validateFullName(value);
+                        break;
+                    case 'email':
+                        error = validateEmail(value);
+                        break;
+                    case 'university':
+                        error = validateUniversity(value);
+                        break;
+                    case 'password':
+                        error = validatePassword(value);
+                        break;
+                    case 'section':
+                        error = validateSection(value);
+                        break;
+                    case 'apuNumber':
+                        error = validateApuNumber(value);
+                        break;
+                }
+                
+                if (error) {
+                    showError(fieldId, error);
+                } else {
+                    clearError(fieldId);
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                clearError(fieldId);
+            });
+        });
+
+        // Form Submission Handler
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(registerForm);
+            const fullName = formData.get('fullName');
+            const email = formData.get('email');
+            const university = formData.get('university');
+            const password = formData.get('password');
+            const section = formData.get('section');
+            const apuNumber = formData.get('apuNumber');
+            
+            // Validate all fields
+            const errors = {
+                fullName: validateFullName(fullName),
+                email: validateEmail(email),
+                university: validateUniversity(university),
+                password: validatePassword(password),
+                section: validateSection(section),
+                apuNumber: validateApuNumber(apuNumber)
+            };
+            
+            // Check if there are any errors
+            const hasErrors = Object.values(errors).some(error => error !== '');
+            
+            if (hasErrors) {
+                // Show all errors
+                Object.keys(errors).forEach(fieldId => {
+                    if (errors[fieldId]) {
+                        showError(fieldId, errors[fieldId]);
+                    }
+                });
+                return;
+            }
+            
+            // Clear all errors
+            formFields.forEach(fieldId => clearError(fieldId));
+            
+            // Show loading state
+            registerButton.disabled = true;
+            registerForm.classList.add('loading');
+            
+            // Simulate registration process
+            setTimeout(() => {
+                // Show success message
+                alert('Registered successfully!');
+                
+                // Add success animation
+                registerForm.classList.add('success-animation');
+                
+                // Redirect to login page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                
+            }, 1000);
+        });
+
+        // Add smooth focus effects
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html> 

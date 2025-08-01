@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This section contains all the important information about the webpage -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports - University Sports Organization</title>
+  
+  <!-- These are the style files that make the website look good -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- All the styling for this page is included here -->
+  <style>
+    /* This sets up the basic look of the page */
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      background: #f7f9fa;
+      color: #222;
+    }
+
+    /* This is the top navigation bar that stays at the top when scrolling */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* This styles the navigation menu */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.5rem 2rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0056b3;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: #0056b3;
+      color: #fff;
+    }
+
+    /* This is the main banner section at the top of the page */
+    .hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #003366;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+      filter: brightness(0.7) contrast(1.1);
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, rgba(0,86,179,0.7) 0%, rgba(255,0,64,0.4) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-switch-btn {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      color: #0056b3;
+      border: none;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      padding: 0;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s, transform 0.18s;
+      pointer-events: auto;
+    }
+    .video-switch-btn i {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+    .video-switch-btn:hover, .video-switch-btn:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: #0056b3;
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: #ff0040;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #0056b3;
+      border: 2px solid #0056b3;
+    }
+    .btn-secondary:hover, .btn-secondary:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* This is the main content area of the page */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* This styles the sports grid section */
+    .sports-grid {
+      padding: 60px 20px;
+      background-color: #f8f9fa;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #0a3d62;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sport-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sport-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .sport-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .sport-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .sport-info i {
+      font-size: 2rem;
+      color: #0056b3;
+      margin-bottom: 10px;
+    }
+
+    .sport-info span {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* This styles the sports information section */
+    .sports-info {
+      margin-bottom: 2.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,86,179,0.08);
+    }
+    .sports-info h2 {
+      color: #0056b3;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .sports-info h3 {
+      color: #ff0040;
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.3rem;
+    }
+    .sports-info p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .sports-info ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .sports-info li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      color: #555;
+    }
+    .sports-info strong {
+      color: #0056b3;
+    }
+
+    /* This is the bottom part of the website */
+    footer {
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem 0;
+      margin-top: 2rem;
+    }
+    .footer-content {
+      font-size: 1rem;
+    }
+
+    /* This makes the website work well on different screen sizes */
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 0.3rem;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+      }
+      main {
+        padding: 0 0.5rem;
+      }
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .navbar {
+        padding: 0.5rem 0.2rem;
+      }
+      .nav-links {
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0.3rem 0.1rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .nav-links {
+        gap: 0.1rem;
+        max-width: 100%;
+      }
+      .nav-links a {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        border-radius: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- This is the top part of the website with the menu -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <!-- This is the main menu with links to all pages -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- This is the main banner section at the top of the page -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Explore Our Sports</h1>
+      <p>Discover the wide range of sports and activities available at our university</p>
+      <!-- These are the main action buttons -->
+      <div class="hero-buttons">
+        <a href="join.html" class="btn btn-primary">Join a Sport</a>
+        <a href="events.html" class="btn btn-secondary">View Events</a>
+        <a href="athletes.html" class="btn btn-secondary">Meet Athletes</a>
+      </div>
+    </div>
+    <!-- This overlay contains the video switch button -->
+    <div class="hero-bg-overlay">
+      <button id="nextVideoBtn" class="video-switch-btn"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <!-- This is the background video that plays automatically -->
+    <video id="heroVideo" class="hero-bg" autoplay muted loop poster="assets/images/hero.jpg">
+      <source src="assets/videos/hero1.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- This is the main content area of the page -->
+  <main>
+    <!-- This section shows all the different sports available -->
+    <section class="sports-grid" id="sports-grid">
+      <h2 class="section-title">Available Sports</h2>
+      <div class="grid">
+        <!-- Each sport card shows a different sport with its image and icon -->
+        <div class="sport-card">
+          <img src="assets/images/sports/football.jpg" alt="Football" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-futbol"></i>
+            <span>Football</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/sports/basketball.jpg" alt="Basketball" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-basketball"></i>
+            <span>Basketball</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/sports/volleyball.jpg" alt="Volleyball" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-volleyball"></i>
+            <span>Volleyball</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/sports/tabletennis.jpg" alt="Table Tennis" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+            <span>Table Tennis</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/sports/marathon.jpg" alt="Track & Field" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-person-running"></i>
+            <span>Marathon</span>
+          </div>
+        </div>
+        <div class="sport-card">
+          <img src="assets/images/sports/swimming.jpg" alt="Swimming" class="sport-img">
+          <div class="sport-info">
+            <i class="fa-solid fa-swimmer"></i>
+            <span>Swimming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- This section provides detailed information about our sports programs -->
+    <section class="sports-info">
+      <h2>Sports Programs & Training</h2>
+      <p>Our university offers comprehensive sports programs designed to develop athletes at all levels, from beginners to elite competitors.</p>
+      
+      <h3>Training Facilities</h3>
+      <p>We provide state-of-the-art facilities including:</p>
+      <ul>
+        <li><strong>Multi-purpose sports complex</strong> with indoor and outdoor facilities</li>
+        <li><strong>Olympic-size swimming pool</strong> with professional coaching</li>
+        <li><strong>Professional football field</strong> with artificial turf</li>
+        <li><strong>Basketball courts</strong> with proper lighting for evening games</li>
+        <li><strong>Table tennis facilities</strong> with international standard equipment</li>
+        <li><strong>Running track</strong> for athletics and marathon training</li>
+      </ul>
+
+      <h3>Coaching Staff</h3>
+      <p>Our experienced coaching team includes:</p>
+      <ul>
+        <li><strong>Certified coaches</strong> with international experience</li>
+        <li><strong>Former professional athletes</strong> who understand the journey</li>
+        <li><strong>Sports psychologists</strong> for mental conditioning</li>
+        <li><strong>Nutrition experts</strong> for optimal performance</li>
+        <li><strong>Physical therapists</strong> for injury prevention and recovery</li>
+      </ul>
+
+      <h3>Competition Opportunities</h3>
+      <p>Students can participate in various competitions:</p>
+      <ul>
+        <li><strong>Inter-university tournaments</strong> across different sports</li>
+        <li><strong>National championships</strong> representing our university</li>
+        <li><strong>International exchange programs</strong> with partner universities</li>
+        <li><strong>Local league competitions</strong> for regular practice</li>
+        <li><strong>Esports tournaments</strong> for gaming enthusiasts</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- This is the bottom part of the website -->
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 UnivSports. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- This loads the JavaScript that makes the website interactive -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html> 

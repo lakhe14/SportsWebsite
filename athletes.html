@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This section contains all the important information about the webpage -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athletes - University Sports Organization</title>
+  
+  <!-- These are the style files that make the website look good -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- All the styling for this page is included here -->
+  <style>
+    /* This sets up the basic look of the page */
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      background: #f7f9fa;
+      color: #222;
+    }
+
+    /* This is the top navigation bar that stays at the top when scrolling */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* This styles the navigation menu */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.5rem 2rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0056b3;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: #0056b3;
+      color: #fff;
+    }
+
+    /* This is the main banner section at the top of the page */
+    .hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #003366;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+      filter: brightness(0.7) contrast(1.1);
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, rgba(0,86,179,0.7) 0%, rgba(255,0,64,0.4) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-switch-btn {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      color: #0056b3;
+      border: none;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      padding: 0;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s, transform 0.18s;
+      pointer-events: auto;
+    }
+    .video-switch-btn i {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+    .video-switch-btn:hover, .video-switch-btn:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: #0056b3;
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: #ff0040;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #0056b3;
+      border: 2px solid #0056b3;
+    }
+    .btn-secondary:hover, .btn-secondary:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* This is the main content area of the page */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* This styles the athlete spotlight section */
+    .athlete-spotlight {
+      padding: 60px 20px;
+      background-color: #f8f9fa;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #0a3d62;
+    }
+
+    .athlete-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .athlete-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .athlete-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .athlete-photo {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .athlete-info {
+      padding: 20px;
+    }
+
+    .athlete-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #054ac3;
+      margin-bottom: 5px;
+    }
+
+    .athlete-role {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .athlete-bio {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    /* This styles the achievements section */
+    .achievements {
+      margin-bottom: 2.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,86,179,0.08);
+    }
+    .achievements h2 {
+      color: #0056b3;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .achievements-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .achievement-category {
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 15px;
+      border-left: 4px solid #ff0040;
+    }
+    .achievement-category h3 {
+      color: #0056b3;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .achievement-category h3 i {
+      color: #ff0040;
+    }
+    .achievement-category ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+    .achievement-category li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      color: #555;
+    }
+    .achievement-category strong {
+      color: #0056b3;
+    }
+
+    /* This styles the development program section */
+    .development-program {
+      margin-bottom: 2.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,86,179,0.08);
+    }
+    .development-program h2 {
+      color: #0056b3;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .program-content p {
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    .program-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature {
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 15px;
+      border-left: 4px solid #0056b3;
+    }
+    .feature h4 {
+      color: #0056b3;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature h4 i {
+      color: #ff0040;
+    }
+    .feature p {
+      line-height: 1.5;
+      color: #555;
+      margin: 0;
+    }
+
+    /* This is the bottom part of the website */
+    footer {
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem 0;
+      margin-top: 2rem;
+    }
+    .footer-content {
+      font-size: 1rem;
+    }
+
+    /* This makes the website work well on different screen sizes */
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 0.3rem;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+      }
+      main {
+        padding: 0 0.5rem;
+      }
+      .athlete-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .navbar {
+        padding: 0.5rem 0.2rem;
+      }
+      .nav-links {
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      .athlete-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0.3rem 0.1rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .nav-links {
+        gap: 0.1rem;
+        max-width: 100%;
+      }
+      .nav-links a {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        border-radius: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- This is the top part of the website with the menu -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <!-- This is the main menu with links to all pages -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- This is the main banner section at the top of the page -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Athlete Spotlight</h1>
+      <p>Meet our outstanding athletes who represent excellence in sports and inspire the next generation</p>
+      <!-- These are the main action buttons -->
+      <div class="hero-buttons">
+        <a href="join.html" class="btn btn-primary">Join Our Team</a>
+        <a href="sports.html" class="btn btn-secondary">View Sports</a>
+        <a href="events.html" class="btn btn-secondary">Upcoming Events</a>
+      </div>
+    </div>
+    <!-- This overlay contains the video switch button -->
+    <div class="hero-bg-overlay">
+      <button id="nextVideoBtn" class="video-switch-btn"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <!-- This is the background video that plays automatically -->
+    <video id="heroVideo" class="hero-bg" autoplay muted loop poster="assets/images/hero.jpg">
+      <source src="assets/videos/hero1.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- This is the main content area of the page -->
+  <main>
+    <!-- This section highlights our best athletes -->
+    <section class="athlete-spotlight" id="athlete-spotlight">
+      <h2 class="section-title">Featured Athletes</h2>
+      <div class="athlete-grid">
+        <!-- Each athlete card shows information about a specific athlete -->
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/anjan-bista.jpg" alt="Anjan Bista" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">Anjan Bista</div>
+            <div class="athlete-role">Forward, Nepal National Football Team</div>
+            <div class="athlete-bio">
+              With over 10 international goals, Anjan is one of Nepal's top footballers, known for his agility, footwork, and leadership.
+            </div>
+          </div>
+        </div>
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/sujan-lama.jpg" alt="Sujan Lama" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">Sujan Lama</div>
+            <div class="athlete-role">Captain, Kathmandu Titans</div>
+            <div class="athlete-bio">
+              A dominating presence on the court, Sujan leads with strategy and precision. 2024 National League MVP.
+            </div>
+          </div>
+        </div>
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/Gaurika-Singh.jpg" alt="Gaurika Singh" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">Gaurika Singh</div>
+            <div class="athlete-role">Olympic Swimmer, Nepal</div>
+            <div class="athlete-bio">
+              Nepal's youngest Olympian, Gaurika holds multiple national records and inspires a generation of athletes.
+            </div>
+          </div>
+        </div>
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/santoshi.jpg" alt="Santoshi Shrestha" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">Santosh Budha</div>
+            <div class="athlete-role">National Marathon Champion</div>
+            <div class="athlete-bio">
+              Known for his endurance and speed, Santosh is a 3-time Kathmandu Marathon winner and national hero.
+            </div>
+          </div>
+        </div>
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/pritee-rana.jpg" alt="Preeti Rana" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">Preeti Rana</div>
+            <div class="athlete-role">Nepal No. 1 Women's Tennis Player</div>
+            <div class="athlete-bio">
+              With a powerful serve and quick reflexes, Preeti dominates courts across South Asia.
+            </div>
+          </div>
+        </div>
+        <div class="athlete-card">
+          <img src="assets/images/Athletes/cr7.jpg" alt="CR7 (Sanjan Gautam)" class="athlete-photo">
+          <div class="athlete-info">
+            <div class="athlete-name">CR7 (Sanjan Gautam)</div>
+            <div class="athlete-role">Pro PUBG Esports Athlete, Nepal</div>
+            <div class="athlete-bio">
+              A rising star in Nepal's esports scene, CR7 is known for sharp aim, strategic plays, and national tournament wins.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- This section shows recent achievements of our athletes -->
+    <section class="achievements">
+      <h2>Athlete Achievements</h2>
+      <div class="achievements-content">
+        <!-- Each category shows different types of achievements -->
+        <div class="achievement-category">
+          <h3><i class="fa-solid fa-medal"></i> Recent Awards</h3>
+          <ul>
+            <li><strong>Anjan Bista:</strong> Best Forward Award - National League 2024</li>
+            <li><strong>Sujan Lama:</strong> MVP - Inter-University Basketball Championship</li>
+            <li><strong>Gaurika Singh:</strong> Gold Medal - South Asian Games 2024</li>
+            <li><strong>Santosh Budha:</strong> 1st Place - Kathmandu Marathon 2024</li>
+            <li><strong>Preeti Rana:</strong> National Tennis Championship Winner</li>
+            <li><strong>CR7:</strong> PUBG Mobile National Champion 2024</li>
+          </ul>
+        </div>
+        
+        <div class="achievement-category">
+          <h3><i class="fa-solid fa-trophy"></i> Team Achievements</h3>
+          <ul>
+            <li>University Football Team - Regional Champions 2024</li>
+            <li>Basketball Team - Inter-University Winners</li>
+            <li>Swimming Team - 5 Gold Medals in National Meet</li>
+            <li>Esports Team - PUBG National Tournament Runners-up</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- This section explains our athlete development program -->
+    <section class="development-program">
+      <h2>Athlete Development Program</h2>
+      <div class="program-content">
+        <p>Our comprehensive athlete development program focuses on:</p>
+        <div class="program-features">
+          <!-- Each feature explains a different aspect of athlete development -->
+          <div class="feature">
+            <h4><i class="fa-solid fa-dumbbell"></i> Physical Training</h4>
+            <p>Specialized training programs designed for each sport with professional coaches and modern facilities.</p>
+          </div>
+          
+          <div class="feature">
+            <h4><i class="fa-solid fa-brain"></i> Mental Conditioning</h4>
+            <p>Sports psychology sessions to build mental strength, focus, and competitive mindset.</p>
+          </div>
+          
+          <div class="feature">
+            <h4><i class="fa-solid fa-graduation-cap"></i> Academic Support</h4>
+            <p>Balanced approach ensuring athletes excel both in sports and academics with flexible schedules.</p>
+          </div>
+          
+          <div class="feature">
+            <h4><i class="fa-solid fa-heart"></i> Health & Nutrition</h4>
+            <p>Comprehensive health monitoring and nutrition guidance for optimal performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- This is the bottom part of the website -->
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 UnivSports. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- This loads the JavaScript that makes the website interactive -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This section contains all the important information about the webpage -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - University Sports Organization</title>
+  
+  <!-- These are the style files that make the website look good -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- All the styling for this page is included here -->
+  <style>
+    /* This sets up the basic look of the page */
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      background: #f7f9fa;
+      color: #222;
+    }
+
+    /* This is the top navigation bar that stays at the top when scrolling */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* This styles the navigation menu */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.5rem 2rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0056b3;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: #0056b3;
+      color: #fff;
+    }
+
+    /* This is the main banner section at the top of the page */
+    .hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #003366;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+      filter: brightness(0.7) contrast(1.1);
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, rgba(0,86,179,0.7) 0%, rgba(255,0,64,0.4) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-switch-btn {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      color: #0056b3;
+      border: none;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      padding: 0;
+      font-size: 1.5rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s, transform 0.18s;
+      pointer-events: auto;
+    }
+    .video-switch-btn i {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+    .video-switch-btn:hover, .video-switch-btn:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: scale(1.08);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      text-align: center;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: #0056b3;
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: #ff0040;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #0056b3;
+      border: 2px solid #0056b3;
+    }
+    .btn-secondary:hover, .btn-secondary:focus {
+      background: #0056b3;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* This is the main content area of the page */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* This styles the upcoming events section */
+    .upcoming-events {
+      padding: 60px 20px;
+      background-color: #f8f9fa;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #0a3d62;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .event-icon {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .event-icon img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .event-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0056b3;
+      margin-bottom: 10px;
+
+      text-align: center;
+    }
+
+    .event-datetime {
+      font-size: 16px;
+      color: #ff0040;
+      margin-bottom: 8px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .event-location {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+    }
+
+    .event-card.physical {
+      border-left: 4px solid #0056b3;
+    }
+
+    .event-card.esports {
+      border-left: 4px solid #ff0040;
+    }
+
+    /* This styles the event categories section */
+    .event-categories {
+      margin-bottom: 2.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,86,179,0.08);
+    }
+    .event-categories h2 {
+      color: #0056b3;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .categories-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .category {
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 15px;
+      border-left: 4px solid #0056b3;
+    }
+    .category h3 {
+      color: #0056b3;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category h3 i {
+      color: #ff0040;
+    }
+    .category p {
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+
+    /* This styles the registration information section */
+    .registration-info {
+      margin-bottom: 2.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 18px rgba(0,86,179,0.08);
+    }
+    .registration-info h2 {
+      color: #0056b3;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+    .registration-content p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .registration-content ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .registration-content li {
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+      color: #555;
+    }
+    .registration-content strong {
+      color: #0056b3;
+    }
+
+    /* This is the bottom part of the website */
+    footer {
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem 0;
+      margin-top: 2rem;
+    }
+    .footer-content {
+      font-size: 1rem;
+    }
+
+    /* This makes the website work well on different screen sizes */
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 0.3rem;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+      }
+      main {
+        padding: 0 0.5rem;
+      }
+      .events-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .navbar {
+        padding: 0.5rem 0.2rem;
+      }
+      .nav-links {
+        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-links a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0.3rem 0.1rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .nav-links {
+        gap: 0.1rem;
+        max-width: 100%;
+      }
+      .nav-links a {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        border-radius: 15px;
+      }
+    } 
+    @media (max-width: 1100px) {
+      .events-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- This is the top part of the website with the menu -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <!-- This is the main menu with links to all pages -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- This is the main banner section at the top of the page -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Upcoming Events</h1>
+      <p>Stay updated with all the exciting sports events and tournaments happening at our university</p>
+      <!-- These are the main action buttons -->
+      <div class="hero-buttons">
+        <a href="sports.html" class="btn btn-secondary">View Sports</a>
+        <a href="athletes.html" class="btn btn-secondary">Meet Athletes</a>
+      </div>
+    </div>
+    <!-- This overlay contains the video switch button -->
+    <div class="hero-bg-overlay">
+      <button id="nextVideoBtn" class="video-switch-btn"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <!-- This is the background video that plays automatically -->
+    <video id="heroVideo" class="hero-bg" autoplay muted loop poster="assets/images/hero.jpg">
+      <source src="assets/videos/hero1.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- This is the main content area of the page -->
+  <main>
+    <!-- This section shows all the upcoming sports events -->
+    <section class="upcoming-events" id="upcoming-events">
+      <h2 class="section-title">Upcoming Events</h2>
+      <div class="events-grid">
+        <!-- Each event card shows details about a specific event -->
+        <div class="event-card physical">
+          <div class="event-icon"><img src="assets/images/upcoming_events/gala.jpg" alt="Sports Gala"></div>
+          <div class="event-title">Sports Gala</div>
+          <div class="event-datetime">August 5, 2025 – 5:00 PM</div>
+          <div class="event-location">Main Stadium</div>
+        </div>
+        <div class="event-card physical">
+          <div class="event-icon"><img src="assets/images/upcoming_events/marathon.jpg" alt="Marathon"></div>
+          <div class="event-title">Marathon</div>
+          <div class="event-datetime">August 20, 2025 – 7:00 AM</div>
+          <div class="event-location">City Park</div>
+        </div>
+        <div class="event-card physical">
+          <div class="event-icon"><img src="assets/images/upcoming_events/basketball1.jpg" alt="Basketball"></div>
+          <div class="event-title">Basketball Tournament</div>
+          <div class="event-datetime">October 5, 2025 – 3:00 PM</div>
+          <div class="event-location">Sports Complex</div>
+        </div>
+        <div class="event-card physical">
+          <div class="event-icon"><img src="assets/images/upcoming_events/football1.jpg" alt="Futsal"></div>
+          <div class="event-title">Futsal</div>
+          <div class="event-datetime">October 20, 2025 – 4:00 PM</div>
+          <div class="event-location">Indoor Arena</div>
+        </div>
+        <div class="event-card esports">
+          <div class="event-icon"><img src="assets/images/upcoming_events/pubg.jpg" alt="PUBG"></div>
+          <div class="event-title">PUBG Tournament</div>
+          <div class="event-datetime">November 5, 2025 – 6:00 PM</div>
+          <div class="event-location">Online</div>
+        </div>
+        <div class="event-card esports">
+          <div class="event-icon"><img src="assets/images/upcoming_events/e-football.jpg" alt="E-Football"></div>
+          <div class="event-title">E-Football Championship</div>
+          <div class="event-datetime">November 20, 2025 – 5:00 PM</div>
+          <div class="event-location">Online</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- This section explains different types of events we organize -->
+    <section class="event-categories">
+      <h2>Event Categories</h2>
+      <div class="categories-content">
+        <!-- Each category explains a different type of event -->
+        <div class="category">
+          <h3><i class="fa-solid fa-running"></i> Physical Sports Events</h3>
+          <p>Traditional sports competitions including football, basketball, volleyball, swimming, and athletics. These events promote physical fitness and teamwork.</p>
+        </div>
+        
+        <div class="category">
+          <h3><i class="fa-solid fa-gamepad"></i> Esports Tournaments</h3>
+          <p>Competitive gaming events featuring popular games like PUBG, E-Football, and other esports titles. Perfect for students who excel in digital sports.</p>
+        </div>
+        
+        <div class="category">
+          <h3><i class="fa-solid fa-trophy"></i> Championship Events</h3>
+          <p>Major tournaments and championships that bring together the best athletes from different universities and regions for intense competition.</p>
+        </div>
+        
+        <div class="category">
+          <h3><i class="fa-solid fa-users"></i> Recreational Events</h3>
+          <p>Fun and inclusive events designed for all skill levels, promoting sports participation and healthy lifestyle among all students.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- This section provides information about how to register for events -->
+    <section class="registration-info">
+      <h2>How to Register for Events</h2>
+      <div class="registration-content">
+        <p>Participating in our sports events is easy! Follow these simple steps to register:</p>
+        
+        <ol>
+          <li><strong>Check Event Details:</strong> Review the event information including date, time, location, and requirements.</li>
+          <li><strong>Verify Eligibility:</strong> Ensure you meet the eligibility criteria for the specific event (age, skill level, etc.).</li>
+          <li><strong>Complete Registration:</strong> Fill out the online registration form with your personal and contact information.</li>
+          <li><strong>Submit Required Documents:</strong> Upload any required documents such as student ID, medical certificates, or previous performance records.</li>
+          <li><strong>Pay Registration Fee:</strong> Complete the payment process if there's a registration fee for the event.</li>
+          <li><strong>Receive Confirmation:</strong> You'll receive a confirmation email with event details and instructions.</li>
+          <li><strong>Attend Pre-event Meeting:</strong> Some events may require attendance at a pre-event briefing or practice session.</li>
+        </ol>
+        
+        <p><strong>Note:</strong> Registration deadlines vary by event, so make sure to register early to secure your spot!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- This is the bottom part of the website -->
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 UnivSports. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- This loads the JavaScript that makes the website interactive -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html> 

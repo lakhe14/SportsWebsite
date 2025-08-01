@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AcePlayNation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Container Styles */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h1 {
+            color: #0056b3;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Form Styles */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:hover {
+            border-color: #0056b3;
+        }
+
+        /* Password field with icon */
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #0056b3;
+        }
+
+        /* Button Styles */
+        .auth-button {
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 86, 179, 0.3);
+        }
+
+        .auth-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Link Styles */
+        .auth-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .auth-links a {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            color: #003d82;
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .auth-button {
+            position: relative;
+        }
+
+        .loading .auth-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Animation */
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Error Animation */
+        .error-animation {
+            animation: errorShake 0.5s ease-in-out;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .auth-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-group input {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .auth-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Error Styles */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error input {
+            border-color: #dc3545;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        /* Demo Credentials Box */
+        .demo-credentials {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .demo-credentials h3 {
+            color: #495057;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .demo-credentials p {
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin: 3px 0;
+        }
+
+        .demo-credentials .credential {
+            background: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #0056b3;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="auth-container">
+        <!-- Header Section -->
+        <div class="auth-header">
+            <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
+            <p>Welcome back to AcePlayNation</p>
+        </div>
+
+        <!-- Demo Credentials Box -->
+        <div class="demo-credentials">
+            <h3><i class="fas fa-info-circle"></i> Demo Credentials</h3>
+            <p>Email: <span class="credential">admin@aceplay.com</span></p>
+            <p>Password: <span class="credential">ace123</span></p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form" id="loginForm">
+            <!-- Email Field -->
+            <div class="form-group" id="emailGroup">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email address"
+                    required
+                >
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group" id="passwordGroup">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <div class="password-field">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="auth-button" id="loginButton">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <!-- Registration Link -->
+        <div class="auth-links">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Fixed credentials for login
+        const VALID_EMAIL = 'admin@aceplay.com';
+        const VALID_PASSWORD = 'ace123';
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+
+        // Password Toggle Functionality
+        passwordToggle.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Update icon
+            const icon = this.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Form Validation Functions
+        function validateEmail(email) {
+            if (!email.trim()) {
+                return 'Email is required';
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Please enter a valid email address';
+            }
+            return '';
+        }
+
+        function validatePassword(password) {
+            if (!password) {
+                return 'Password is required';
+            }
+            if (password.length < 3) {
+                return 'Password must be at least 3 characters long';
+            }
+            return '';
+        }
+
+        // Display Error Function
+        function showError(fieldId, errorMessage) {
+            const group = document.getElementById(fieldId + 'Group');
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            group.classList.add('error');
+            errorElement.textContent = errorMessage;
+            errorElement.style.display = 'block';
+        }
+
+        // Clear Error Function
+        function clearError(fieldId) {
+            const group = document.getElementById(fieldId + 'Group');
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            group.classList.remove('error');
+            errorElement.style.display = 'none';
+        }
+
+        // Real-time Validation
+        const formFields = ['email', 'password'];
+        
+        formFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            
+            field.addEventListener('blur', function() {
+                const value = this.value;
+                let error = '';
+                
+                switch(fieldId) {
+                    case 'email':
+                        error = validateEmail(value);
+                        break;
+                    case 'password':
+                        error = validatePassword(value);
+                        break;
+                }
+                
+                if (error) {
+                    showError(fieldId, error);
+                } else {
+                    clearError(fieldId);
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                clearError(fieldId);
+            });
+        });
+
+        // Form Submission Handler
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(loginForm);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            // Validate all fields
+            const errors = {
+                email: validateEmail(email),
+                password: validatePassword(password)
+            };
+            
+            // Check if there are any validation errors
+            const hasErrors = Object.values(errors).some(error => error !== '');
+            
+            if (hasErrors) {
+                // Show all errors
+                Object.keys(errors).forEach(fieldId => {
+                    if (errors[fieldId]) {
+                        showError(fieldId, errors[fieldId]);
+                    }
+                });
+                return;
+            }
+            
+            // Clear all errors
+            formFields.forEach(fieldId => clearError(fieldId));
+            
+            // Check credentials
+            if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+                // Show loading state
+                loginButton.disabled = true;
+                loginForm.classList.add('loading');
+                
+                // Simulate login process
+                setTimeout(() => {
+                    // Show success message
+                    alert('Login successful!');
+                    
+                    // Add success animation
+                    loginForm.classList.add('success-animation');
+                    
+                    // Redirect to index.html after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                    
+                }, 1000);
+            } else {
+                // Show error animation
+                loginForm.classList.add('error-animation');
+                
+                // Show error message
+                alert('Invalid email or password');
+                
+                // Remove error animation after animation completes
+                setTimeout(() => {
+                    loginForm.classList.remove('error-animation');
+                }, 500);
+                
+                // Clear password field
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        // Add smooth focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Auto-fill demo credentials for testing (optional)
+        // Uncomment the lines below to auto-fill the form for testing
+        /*
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email').value = VALID_EMAIL;
+            document.getElementById('password').value = VALID_PASSWORD;
+        });
+        */
+    </script>
+</body>
+</html> 
