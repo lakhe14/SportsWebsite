@@ -9,7 +9,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
+   
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="auth-container">
+        <!-- Header Section -->
+        <div class="auth-header">
+            <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
+            <p>Welcome back to AcePlayNation</p>
+        </div>
+
+        <!-- Demo Credentials Box -->
+        <div class="demo-credentials">
+            <h3><i class="fas fa-info-circle"></i> Demo Credentials</h3>
+            <p>Email: <span class="credential">admin@aceplay.com</span></p>
+            <p>Password: <span class="credential">ace123</span></p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="auth-form" id="loginForm">
+            <!-- Email Field -->
+            <div class="form-group" id="emailGroup">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email address"
+                    required
+                >
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group" id="passwordGroup">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <div class="password-field">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="auth-button" id="loginButton">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <!-- Registration Link -->
+        <div class="auth-links">
+            <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+    </div>
+
+ <style>
         /* Reset and Base Styles */
         * {
             margin: 0;
@@ -290,71 +357,6 @@
             margin: 0 5px;
         }
     </style>
-</head>
-<body>
-    <!-- Main Container -->
-    <div class="auth-container">
-        <!-- Header Section -->
-        <div class="auth-header">
-            <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
-            <p>Welcome back to AcePlayNation</p>
-        </div>
-
-        <!-- Demo Credentials Box -->
-        <div class="demo-credentials">
-            <h3><i class="fas fa-info-circle"></i> Demo Credentials</h3>
-            <p>Email: <span class="credential">admin@aceplay.com</span></p>
-            <p>Password: <span class="credential">ace123</span></p>
-        </div>
-
-        <!-- Login Form -->
-        <form class="auth-form" id="loginForm">
-            <!-- Email Field -->
-            <div class="form-group" id="emailGroup">
-                <label for="email">
-                    <i class="fas fa-envelope"></i> Email
-                </label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="Enter your email address"
-                    required
-                >
-                <div class="error-message" id="emailError"></div>
-            </div>
-
-            <!-- Password Field -->
-            <div class="form-group" id="passwordGroup">
-                <label for="password">
-                    <i class="fas fa-lock"></i> Password
-                </label>
-                <div class="password-field">
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Enter your password"
-                        required
-                    >
-                    <button type="button" class="password-toggle" id="passwordToggle">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-                <div class="error-message" id="passwordError"></div>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="auth-button" id="loginButton">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
-
-        <!-- Registration Link -->
-        <div class="auth-links">
-            <p>Don't have an account? <a href="register.html">Register here</a></p>
-        </div>
-    </div>
 
     <script>
         // Fixed credentials for login

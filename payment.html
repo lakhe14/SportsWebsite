@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This section contains all the important information about the webpage -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - AcePlayNation</title>
+  
+  <!-- These are the style files that make the website look good -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- This is the top part of the website with the menu -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">AcePlayNation</div>
+      <!-- This is the main menu with links to all pages -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sports.html">Sports</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="athletes.html">Athletes</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="payment.html">Payment</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- This is the main payment section -->
+  <section class="payment-section">
+    <div class="payment-container">
+      <h1 class="payment-title">Payment Portal</h1>
+      <p class="payment-subtitle">Complete your payment securely</p>
+      
+      <!-- Payment form -->
+      <form class="payment-form" id="paymentForm" autocomplete="off">
+        <!-- Personal Information Section -->
+        <div class="form-section">
+          <h3><i class="fas fa-user"></i> Personal Information</h3>
+          
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" required maxlength="60" placeholder="Enter your full name">
+          
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required maxlength="100" placeholder="Enter your email address">
+          
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required maxlength="20" pattern="[0-9+\-\s()]{7,20}" placeholder="e.g. 9800000000">
+        </div>
+
+        <!-- Payment Details Section -->
+        <div class="form-section">
+          <h3><i class="fas fa-credit-card"></i> Payment Details</h3>
+          
+          <label for="paymentType">Payment Type *</label>
+          <select id="paymentType" name="paymentType" required>
+            <option value="" disabled selected>Select payment type</option>
+            <option value="registration">Registration Fee</option>
+            <option value="event">Event Fee</option>
+            <option value="membership">Membership Fee</option>
+            <option value="tournament">Tournament Entry</option>
+            <option value="equipment">Equipment Fee</option>
+          </select>
+          
+          <label for="amount">Amount (NPR) *</label>
+          <input type="number" id="amount" name="amount" required min="1" max="50000" placeholder="Enter amount in NPR">
+          
+          <label for="description">Description</label>
+          <textarea id="description" name="description" maxlength="200" placeholder="Optional: Add payment description"></textarea>
+        </div>
+
+        <!-- Payment Method Section -->
+        <div class="form-section">
+          <h3><i class="fas fa-wallet"></i> Payment Method *</h3>
+          
+          <div class="payment-methods">
+            <div class="payment-method">
+              <input type="radio" id="esewa" name="paymentMethod" value="esewa" required checked>
+              <label for="esewa" class="method-label" onclick="openQRCode()">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Esewa</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-lock"></i>
+          Proceed to Payment
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMsg">
+        <i class="fas fa-check-circle"></i>
+        <h3>Payment Successful!</h3>
+        <p>Your payment has been processed successfully. You will receive a confirmation email shortly.</p>
+        <div class="payment-details" id="paymentDetails"></div>
+        <button class="btn-secondary" onclick="window.location.href='index.html'">Return to Home</button>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div class="loading-spinner" id="loadingSpinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Processing Payment...</p>
+      </div>
+
+      <!-- QR Code Modal -->
+      <div class="qr-modal-overlay" id="qrModal">
+        <div class="qr-modal-content">
+          <div class="qr-modal-header">
+            <h3>Esewa QR Code</h3>
+            <button class="close-btn" onclick="closeQRModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="qr-modal-body">
+            <img src="assets/images/payment/Qrcode.jpg" alt="Esewa QR Code" class="qr-code-image">
+            <p>Scan this QR code with your Esewa app to complete the payment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom CSS for Payment Page -->
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .payment-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+      padding: 40px 10px;
+    }
+
+    .payment-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 36px 28px 28px 28px;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .payment-title {
+      text-align: center;
+      color: #054ac3;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .payment-subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .form-section {
+      margin-bottom: 32px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #054ac3;
+    }
+
+    .form-section h3 {
+      color: #054ac3;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-section h3 i {
+      font-size: 1rem;
+    }
+
+    .payment-form label {
+      display: block;
+      margin-bottom: 6px;
+      color: #222;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .payment-form input,
+    .payment-form select,
+    .payment-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border: 1px solid #cfd8dc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #fff;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+
+    .payment-form input:focus,
+    .payment-form select:focus,
+    .payment-form textarea:focus {
+      border-color: #054ac3;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(5, 74, 195, 0.1);
+    }
+
+    .payment-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+    }
+
+    .payment-method input[type="radio"] {
+      display: none;
+    }
+
+    .method-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      margin-bottom: 0;
+      background: #fff;
+    }
+
+    .method-label i {
+      font-size: 1.2rem;
+      color: #666;
+    }
+
+    .method-label span {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .payment-method input[type="radio"]:checked + .method-label {
+      border-color: #054ac3;
+      background: #f0f4ff;
+      box-shadow: 0 2px 8px rgba(5, 74, 195, 0.15);
+    }
+
+    .payment-method input[type="radio"]:checked + .method-label i {
+      color: #054ac3;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #054ac3;
+      color: #fff;
+      border: none;
+      padding: 16px 0;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn:hover {
+      background: #032e7a;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      color: #2e7d32;
+      background: #eafaf1;
+      border: 1px solid #b2dfdb;
+      border-radius: 8px;
+      padding: 24px 20px;
+      margin-top: 20px;
+    }
+
+    .success-message i {
+      font-size: 3rem;
+      color: #4caf50;
+      margin-bottom: 16px;
+    }
+
+    .success-message h3 {
+      color: #2e7d32;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .success-message p {
+      color: #388e3c;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .payment-details {
+      background: #fff;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .loading-spinner i {
+      font-size: 3rem;
+      color: #054ac3;
+      margin-bottom: 16px;
+    }
+
+    .loading-spinner p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* QR Code Modal Styles */
+    .qr-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .qr-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: #054ac3;
+      color: #fff;
+    }
+
+    .qr-modal-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .qr-modal-body {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .qr-code-image {
+      max-width: 250px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .qr-modal-body p {
+      color: #666;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Error styling */
+    .error {
+      border-color: #dc3545 !important;
+      background: #fff5f5 !important;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.85rem;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .payment-container {
+        padding: 22px 6vw 18px 6vw;
+      }
+      
+      .payment-title {
+        font-size: 1.4rem;
+      }
+      
+      .form-section {
+        padding: 16px;
+      }
+      
+      .method-label {
+        padding: 14px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .payment-container {
+        padding: 16px 4vw 12px 4vw;
+      }
+      
+      .payment-title {
+        font-size: 1.2rem;
+      }
+      
+      .payment-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+  <!-- JavaScript for Payment Form Validation and Processing -->
+  <script>
+    // Get form elements
+    const paymentForm = document.getElementById('paymentForm');
+    const successMsg = document.getElementById('successMsg');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const paymentDetails = document.getElementById('paymentDetails');
+
+    // Form validation function
+    function validateForm() {
+      let isValid = true;
+      const requiredFields = ['fullName', 'email', 'phone', 'paymentType', 'amount'];
+      
+      // Clear previous error styling
+      document.querySelectorAll('.error').forEach(field => {
+        field.classList.remove('error');
+      });
+      document.querySelectorAll('.error-message').forEach(msg => {
+        msg.remove();
+      });
+
+      // Validate required fields
+      requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const value = field.value.trim();
+        
+        if (!value) {
+          field.classList.add('error');
+          showError(field, 'This field is required');
+          isValid = false;
+        }
+      });
+
+      // Validate email format
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email && !emailRegex.test(email)) {
+        document.getElementById('email').classList.add('error');
+        showError(document.getElementById('email'), 'Please enter a valid email address');
+        isValid = false;
+      }
+
+      // Validate phone number
+      const phone = document.getElementById('phone').value.trim();
+      const phoneRegex = /^[0-9+\-\s()]{7,20}$/;
+      if (phone && !phoneRegex.test(phone)) {
+        document.getElementById('phone').classList.add('error');
+        showError(document.getElementById('phone'), 'Please enter a valid phone number');
+        isValid = false;
+      }
+
+      // Validate amount
+      const amount = document.getElementById('amount').value;
+      if (amount && (isNaN(amount) || amount <= 0 || amount > 50000)) {
+        document.getElementById('amount').classList.add('error');
+        showError(document.getElementById('amount'), 'Please enter a valid amount between 1 and 50,000 NPR');
+        isValid = false;
+      }
+
+      // Validate payment method selection
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+      if (!paymentMethod) {
+        showError(document.querySelector('.payment-methods'), 'Please select a payment method');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    // Function to show error messages
+    function showError(field, message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = message;
+      field.parentNode.insertBefore(errorDiv, field.nextSibling);
+    }
+
+    // Function to simulate payment processing
+    function simulatePayment(formData) {
+      return new Promise((resolve) => {
+        // Show loading spinner
+        paymentForm.style.display = 'none';
+        loadingSpinner.style.display = 'block';
+        
+        // Simulate API call delay
+        setTimeout(() => {
+          // Generate transaction ID
+          const transactionId = 'TXN' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+          
+          // Create payment details
+          const paymentInfo = {
+            transactionId: transactionId,
+            amount: formData.get('amount'),
+            paymentMethod: formData.get('paymentMethod'),
+            paymentType: formData.get('paymentType'),
+            customerName: formData.get('fullName'),
+            customerEmail: formData.get('email'),
+            timestamp: new Date().toLocaleString()
+          };
+          
+          resolve(paymentInfo);
+        }, 3000); // 3 second delay to simulate processing
+      });
+    }
+
+    // Function to display payment details
+    function displayPaymentDetails(paymentInfo) {
+      const paymentTypeLabels = {
+        'registration': 'Registration Fee',
+        'event': 'Event Fee',
+        'membership': 'Membership Fee',
+        'tournament': 'Tournament Entry',
+        'equipment': 'Equipment Fee'
+      };
+
+      const methodLabels = {
+        'esewa': 'Esewa'
+      };
+
+      paymentDetails.innerHTML = `
+        <strong>Transaction ID:</strong> ${paymentInfo.transactionId}<br>
+        <strong>Amount:</strong> NPR ${paymentInfo.amount}<br>
+        <strong>Payment Type:</strong> ${paymentTypeLabels[paymentInfo.paymentType]}<br>
+        <strong>Payment Method:</strong> ${methodLabels[paymentInfo.paymentMethod]}<br>
+        <strong>Customer:</strong> ${paymentInfo.customerName}<br>
+        <strong>Email:</strong> ${paymentInfo.customerEmail}<br>
+        <strong>Date:</strong> ${paymentInfo.timestamp}
+      `;
+    }
+
+    // Form submission handler
+    paymentForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Validate form
+      if (!validateForm()) {
+        return;
+      }
+
+      // Collect form data
+      const formData = new FormData(paymentForm);
+      
+      try {
+        // Simulate payment processing
+        const paymentInfo = await simulatePayment(formData);
+        
+        // Hide loading spinner and show success message
+        loadingSpinner.style.display = 'none';
+        displayPaymentDetails(paymentInfo);
+        successMsg.style.display = 'block';
+        
+        // Reset form
+        paymentForm.reset();
+        
+        // Optional: Redirect to home page after 5 seconds
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 5000);
+        
+      } catch (error) {
+        // Handle errors
+        loadingSpinner.style.display = 'none';
+        paymentForm.style.display = 'block';
+        alert('Payment processing failed. Please try again.');
+      }
+    });
+
+    // Real-time validation for amount field
+    document.getElementById('amount').addEventListener('input', function(e) {
+      const value = e.target.value;
+      if (value && (isNaN(value) || value <= 0 || value > 50000)) {
+        e.target.classList.add('error');
+      } else {
+        e.target.classList.remove('error');
+      }
+    });
+
+    // Real-time validation for email field
+    document.getElementById('email').addEventListener('input', function(e) {
+      const email = e.target.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email && !emailRegex.test(email)) {
+        e.target.classList.add('error');
+      } else {
+        e.target.classList.remove('error');
+      }
+    });
+
+    // Real-time validation for phone field
+    document.getElementById('phone').addEventListener('input', function(e) {
+      const phone = e.target.value.trim();
+      const phoneRegex = /^[0-9+\-\s()]{7,20}$/;
+      if (phone && !phoneRegex.test(phone)) {
+        e.target.classList.add('error');
+      } else {
+        e.target.classList.remove('error');
+      }
+    });
+
+    // QR Code Modal Functions
+    function openQRCode() {
+      document.getElementById('qrModal').style.display = 'flex';
+    }
+
+    function closeQRModal() {
+      document.getElementById('qrModal').style.display = 'none';
+    }
+
+    // Close QR modal when clicking outside
+    document.getElementById('qrModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeQRModal();
+      }
+    });
+  </script>
+</body>
+</html> 
